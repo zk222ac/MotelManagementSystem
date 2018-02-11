@@ -1,0 +1,144 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Black"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BookingSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:vm="using:BookingSystem.ViewModel"
+    xmlns:converter="using:BookingSystem.Converter"
+    x:Class="BookingSystem.MainPage"
+    mc:Ignorable="d">
+
+
+    <Page.DataContext>
+        <vm:AccommodationVM x:Name="ViewModel"></vm:AccommodationVM>
+    </Page.DataContext>
+    <Page.Resources>
+        <converter:CalendarToDateTimeConverter x:Key="CalendarToDateTimeConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Assets/eiffel.jpg" Opacity="0.7"/>
+        </Grid.Background>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.RowSpan="11" Margin="15,34,50,48" Background="#B2007ACC" RenderTransformOrigin="1,0" CornerRadius="20">
+            <StackPanel.RenderTransform>
+                <CompositeTransform TranslateX="12"/>
+            </StackPanel.RenderTransform>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="10" Width="450" Height="50" Background="#B2007ACC" RenderTransformOrigin="1,0" CornerRadius="20">
+           <TextBlock Margin="10,0,0,0" Text="For further information..." FontStyle="Italic" Foreground="AliceBlue"></TextBlock>
+            <TextBlock Margin="10,0,0,0" Text="Telephone Number: 7894654887    Email: info@francevacances.com" FontStyle="Italic" Foreground="AliceBlue"></TextBlock>
+        </StackPanel>
+        <Grid Width="237"  HorizontalAlignment="Center"  Margin="89,47,101,20" Grid.RowSpan="2">
+            <Grid.Background >
+                <ImageBrush ImageSource="../Assets/1240on600.png" Stretch="Fill"   />
+            </Grid.Background>
+        </Grid>
+          <TextBlock Grid.Column="0" Name="DestionationTextBlock" Grid.Row="3" Foreground="White" Text="Choose your destination" FontSize="28" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Bottom">
+            </TextBlock>
+        <TextBox  Text="{Binding SearchAccommodation.Location, Mode=TwoWay}" PlaceholderText="City,Country" FontSize="28" Grid.Column="0" Name="LocationTextBox" Grid.Row="4"  BorderBrush="AliceBlue"  Width="320" Margin="50,0,0,0" HorizontalAlignment="Left"  >
+          </TextBox>
+        <TextBlock Grid.Column="0" Name="WhenTextBlock" Text="Choose when" Foreground="White" FontSize="28" HorizontalAlignment="Left" Grid.Row="5" Margin="50,0,0,0" VerticalAlignment="Bottom"/>
+        <CalendarDatePicker Grid.Column="0"  Name="CheckInPicker" BorderBrush="AliceBlue" Date="{Binding SearchAccommodation.CheckInDate, Mode=TwoWay,Converter={StaticResource CalendarToDateTimeConverter}}"  Grid.Row="6" HorizontalAlignment="Left" FontSize="32" Width="150" Margin="50,0,0,0" Height="auto" PlaceholderText="Check-in"/>
+        <CalendarDatePicker Grid.Column="0" Name="ChekOutPicker" BorderBrush="AliceBlue" Date="{Binding SearchAccommodation.CheckOutDate, Mode=TwoWay,Converter={StaticResource CalendarToDateTimeConverter}}" Grid.Row="6"  HorizontalAlignment="Left" PlaceholderText="Check-out" Width="150" FontSize="28" Margin="220,0,0,0" />
+        <StackPanel Grid.Column="0" Grid.Row="8">
+            <TextBlock Name="GuestsTextBlock" Foreground="White" Grid.Row="7" FontSize="28" Text="Guests" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Bottom"/>
+            <TextBox TextChanged="TextBox_OnTextChanged" PlaceholderText="Number of persons" Width="320" Foreground="White" BorderBrush="AliceBlue" Text="{Binding SearchAccommodation.Guests,Mode=TwoWay}" Grid.Row="7" FontSize="28" HorizontalAlignment="Left" Margin="50,0,0,10" Grid.RowSpan="2" />
+        </StackPanel>
+        <StackPanel Grid.Row="9" Grid.Column="0">
+            <TextBlock Text="Price" Foreground="White" FontSize="28" HorizontalAlignment="Left" Margin="50,0,0,0"/>
+            <TextBox Grid.Row="8" Text="{Binding SearchAccommodation.Price, Mode=TwoWay}" PlaceholderText="Enter Price" FontSize="28" BorderBrush="AliceBlue" HorizontalAlignment="Left" Width="200" Margin="50,0,0,0" />
+        </StackPanel>
+        <Button  Grid.Column="0" Name="SearchButton" Background="#4C0364B0" BorderBrush="AliceBlue" Command="{Binding SearchCommand}" Foreground="White" Grid.Row="9" Content="Search" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="20"  Margin="0,0,70,0" />
+         <StackPanel Background="#FF0364B0" Grid.Column="1" Grid.Row="10"   VerticalAlignment="Center" Margin="0,0,20,0"  Width="50" BorderBrush="AliceBlue"  HorizontalAlignment="Right">
+            <Button Foreground="AntiqueWhite" Content="Login" Background="#4C0364B0"  FontFamily="Californian FB" VerticalAlignment="Center" Margin="0,0,0,0"  Width="50" BorderBrush="AliceBlue" FontSize="10" HorizontalAlignment="Right">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Click">
+                        <Core:NavigateToPageAction TargetPage="BookingSystem.View.LogIn"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </Button>
+        </StackPanel>
+        <GridView Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" >
+            <ComboBox PlaceholderText="Sort By"  SelectedItem="{Binding SearchAccommodation.SortString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" >
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="SelectionChanged">
+                        <Core:InvokeCommandAction Command="{Binding SortCommand}"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+                <ComboBoxItem Content ="Price ↑"/>
+                <ComboBoxItem Content="Name ↑"/>
+                <ComboBoxItem Content="Guest Number ↑"/>
+                <ComboBoxItem Content="Price ↓"/>
+                <ComboBoxItem Content="Name ↓"/>
+                <ComboBoxItem Content="Guest Number ↓"/>
+            </ComboBox>
+        </GridView>
+        <Grid Grid.Column="1" Grid.RowSpan="9" Grid.Row="1">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <GridView SelectedItem="{Binding SelectedAccommodation,Mode=TwoWay}" ItemsSource="{Binding  SearchedAccommodations,Mode=TwoWay}" Margin="10,18,46,2" >
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="SelectionChanged">
+                        <Core:NavigateToPageAction Parameter="{Binding SelectedAccommodation}" TargetPage="BookingSystem.View.Book"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+                <GridView.ItemTemplate >
+                    <DataTemplate>
+                        <Border Background="#4C2E8DEF" Margin="0,0,0,0" CornerRadius="20" >
+                            <StackPanel Margin="10,10,10,10" Orientation="Horizontal" CornerRadius="20">
+                                <StackPanel  Margin="10,10,20,10">
+                                    <Image Source="{Binding Picture}" MaxWidth="350" MaxHeight="160"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                        <TextBlock Text="Price per day : " FontSize="20" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Price }" Foreground="White" FontSize="20" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20" >
+                                        <TextBlock TextAlignment="Right" FontSize="14" Text="Location: " Foreground="AliceBlue" Margin="0,0,5,0" />
+                                        <TextBlock TextAlignment="left" FontSize="14" FontWeight="Bold" Foreground="AliceBlue" Text="{Binding Location}"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+        <TextBlock Grid.Column="1" Grid.Row="0" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="38" Text="Welcome to France Vacances!" FontWeight="Thin" FontFamily="ALGERIAN" Margin="250,23,9,19"/>
+
+    </Grid>
+</Page>
+
+
+
+
+
+
+

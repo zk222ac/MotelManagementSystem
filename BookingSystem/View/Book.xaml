@@ -1,0 +1,128 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="Black"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BookingSystem.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:BookingSystem.ViewModel"
+    xmlns:converter="using:BookingSystem.Converter"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="BookingSystem.View.Book"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:AccommodationVM x:Name="ViewModel"/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Assets/eiffel.jpg" Opacity="0.7" />
+        </Grid.Background>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Grid.RowSpan="6" Grid.Row="1" x:Name="StackPanel"  Background="#B2007ACC" Grid.ColumnSpan="2" Margin="24,4,616,164" CornerRadius="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding SelectedAccommodation.Picture}" Grid.Column="0" MaxWidth="300" MaxHeight="400" Width="300" Margin="20,20,20,20" HorizontalAlignment="Center"/>
+                <StackPanel Grid.RowSpan="5" Width="250" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0">
+                    <TextBlock TextWrapping="Wrap" FontFamily="Californian FB" Foreground="White" Text="{Binding SelectedAccommodation.Title}" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="32"/>
+                    <TextBlock TextWrapping="Wrap" FontFamily="Californian FB" Foreground="White" Text="{Binding SelectedAccommodation.Location}" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="24"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Left">
+                        <TextBlock FontFamily="Californian FB" Foreground="White" Text="Number of guests: " FontSize="22"/>
+                        <TextBlock FontFamily="Californian FB" Foreground="White" Text="{Binding SelectedAccommodation.NumberOfGuests}" FontSize="22" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel  Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Left">
+                        <TextBlock FontFamily="Californian FB" Foreground="White" Text="Price: " FontSize="22"/>
+                        <TextBlock FontFamily="Californian FB" Foreground="White" Text="{Binding SelectedAccommodation.Price}" FontSize="22" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Center" >
+                <TextBlock Width="550" Height="100"  FontFamily="Californian FB" TextWrapping="Wrap" Foreground="White" Text="{Binding SelectedAccommodation.Description}" FontSize="18" TextAlignment="Center" />
+            </StackPanel>
+            <Grid  Height="120" Width="640"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Source="../Assets/bed.jpg" Margin="0,0,0,0" MaxHeight="70" MaxWidth="200" />
+                    <Image Source="../Assets/bath.jpg" Margin="20,0,0,0" MaxHeight="70" MaxWidth="200"/>
+                    <Image Source="../Assets/images.jpg" Margin="20,0,0,0" MaxHeight="70" MaxWidth="200"/>
+                    <Image Source="../Assets/Kitchen-1.jpg" Margin="20,0,0,0" MaxHeight="70" MaxWidth="200"/>
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="*Note: Booking charge will be only 10, the rest you will pay when you arrive at the hotel you booked." FontSize="14" Foreground="White" TextAlignment="Center" Margin="10,0,10,0" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.RowSpan="3" Orientation="Horizontal" Margin="104,2,30,46" Grid.Row="1" Grid.Column="1" Background="#4C0364B0"  BorderBrush="Black" BorderThickness="2"  AutomationProperties.SizeOfSet="-1" CornerRadius="20">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                  <EntranceThemeTransition/>
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+            <StackPanel Grid.RowSpan="2" Orientation="Vertical">
+                <TextBlock Foreground="White" FontFamily="Californian FB" Text="Full Name:" FontSize="27" Margin="10,40,0,0"/>
+                <TextBlock Foreground="White" FontFamily="Californian FB" Text="Email adress:" FontSize="27" Margin="10,20,0,0"/>
+                <TextBlock Foreground="White" FontFamily="Californian FB" Text="Telephone number:" FontSize="27" Margin="10,20,0,0"/>
+                </StackPanel>
+            <StackPanel >
+                <TextBox Text="{Binding Reservation.FullName,Mode=TwoWay}" Width="250" HorizontalAlignment="Left" Margin="20,40,0,0"/>
+                <TextBox Text="{Binding Reservation.Email,Mode=TwoWay}"  Width="250" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                <TextBox  Text="{Binding Reservation.TelephoneNumber,Mode=TwoWay}" Width="250" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+                </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Orientation="Horizontal" Margin="104,2,30,46"  Background="#B2007ACC"  BorderBrush="Black" BorderThickness="2"  AutomationProperties.SizeOfSet="-1" CornerRadius="20">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock Foreground="White" FontWeight="Thin" FontFamily="optima" Text="Card Number:" FontSize="24" Margin="10,30,0,0"/>
+                <TextBlock Foreground="White" FontWeight="Thin" FontFamily="optima" Text="Expiration Month:" FontSize="24" Margin="10,10,0,0"/>
+                <TextBlock Foreground="White" FontWeight="Thin" FontFamily="optima" Text="Expiration Year:" FontSize="24" Margin="10,10,0,0"/>
+                <TextBlock Foreground="White" FontWeight="Thin" FontFamily="optima" Text="CVV:" FontSize="24" Margin="10,10,0,0"/>
+
+            </StackPanel>
+            <StackPanel Width="294">
+                <TextBox   Text="{Binding Reservation.CardNumber,Mode=TwoWay}" HorizontalAlignment="Left" Width="260" PlaceholderText="16 Digit Number" Margin="20,25,0,0"/>
+                <TextBox  Name="ExpirationMonth" PlaceholderText="MM" HorizontalAlignment="Left"  Width="50" Margin="20,10,0,0" Text="{Binding Reservation.ExpirationMonth, Mode=TwoWay}"/>
+                <TextBox Name="ExpirationYear" PlaceholderText="YY" HorizontalAlignment="Left"  Width="50" Margin="20,10,0,0" Text="{Binding Reservation.ExpirationYear, Mode=TwoWay}"/>
+                <TextBox  Name="CVV" PlaceholderText="000"  Width="50" Margin="20,10,0,5" HorizontalAlignment="Left" Text="{Binding Reservation.Cvv, Mode=TwoWay}"/>
+                <Grid Width="190" Height="45" VerticalAlignment="Bottom" Margin="90,-200,0,0">
+                    <Grid.Background >
+                        <ImageBrush  ImageSource="../Assets/cards.png" Stretch="Fill" >
+                        </ImageBrush>
+                    </Grid.Background>
+                    <TextBlock Text="We Accept:" Foreground="AliceBlue" FontFamily="optima" Margin="0,-20,0,0" />
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock FontWeight="Bold" Grid.Row="5"  Grid.Column="1" Width="366" FontSize="15" TextWrapping="Wrap" TextAlignment="Center" Height="130" Text="{Binding RegisterReservationMessage}" Foreground="{Binding RegisterReservationMessageColor}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="49,106,0,0" Grid.RowSpan="2" />
+        <StackPanel BorderBrush="AliceBlue" Background="#FF168412" Grid.Row="6" Grid.Column="1" Height="50" HorizontalAlignment="Left" Margin="456,0,0,0" VerticalAlignment="Top" >
+            <Button BorderBrush="AliceBlue" Background="#FF168412" Command="{Binding AddReservation}"  Height="50" Content="BOOK" Foreground="White" FontSize="30" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <AppBarButton x:Name="appBarButton" Foreground="AliceBlue" Icon="Back" Label="" Grid.Row="0" Margin="120,20,0,0" VerticalAlignment="Top" Width="60">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Click">
+                        <Core:NavigateToPageAction TargetPage="BookingSystem.MainPage"/>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <StackPanel>
+                <TextBlock Grid.Row="0" Height="44" Text="Back" FontSize="40" VerticalAlignment="Top" Foreground="AntiqueWhite" FontFamily="Californian FB" TextAlignment="Center" Margin="100,20,300,0" Width="100" />
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
